@@ -211,25 +211,27 @@ section {
     margin-bottom: 3rem;
 }
 
+
 section h2 {
     font-size: 1.7rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.6rem;
     color: white;
     position: relative;
-    display: inline-block;
+    display: block;          /* changed from inline-block */
+    text-align: center;      /* centers the text */
 }
 
 section h2::after {
     content: '';
     position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 45%;
+    bottom: -8px;
+    left: 50%;               /* center the line */
+    transform: translateX(-50%);
+    width: 70px;             /* nice fixed width (looks better centered) */
     height: 3px;
     background: linear-gradient(90deg, var(--sea-green), var(--lemon-lime), transparent);
     border-radius: 2px;
 }
-
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
