@@ -290,7 +290,15 @@ section h2::after {
     }
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
+section {
+    scroll-margin-top: 90px;
+}
 
-
-
+nav a:target,
+nav a:focus {
+    color: var(--yellow-2);
+}
