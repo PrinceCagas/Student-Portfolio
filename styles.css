@@ -308,3 +308,18 @@ nav a:focus {
 section h2 {
     scroll-margin-top: 90px;
 }
+
+/* ===== Sticky Nav Offset Fix ===== */
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 90px;
+}
+
+/* Optional: make the active nav link more visible */
+nav a:target,
+nav a:focus {
+    color: var(--yellow-2);
+}
