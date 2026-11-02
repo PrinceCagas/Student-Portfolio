@@ -1,0 +1,296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --jungle-teal: #007f5f;
+    --sea-green: #2b9348;
+    --bright-fern: #55a630;
+    --lime-moss: #80b918;
+    --yellow-green: #aacc00;
+    --lemon-lime: #bfd200;
+    --lemon-lime-2: #d4d700;
+    --lemon-lime-3: #dddf00;
+    --yellow: #eeef20;
+    --yellow-2: #ffff3f;
+
+    --bg-dark: #0a1a12;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --accent: var(--bright-fern);
+    --accent-2: var(--yellow-green);
+    --accent-3: var(--lemon-lime);
+    --text: #f0f7e8;
+    --text-muted: #b8d4a8;
+    --border: rgba(170, 204, 0, 0.15);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(ellipse at 15% 20%, rgba(0, 127, 95, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 75%, rgba(170, 204, 0, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(85, 166, 48, 0.08) 0%, transparent 60%);
+}
+
+header {
+    text-align: center;
+    padding: 4rem 1.5rem 2.5rem;
+    position: relative;
+}
+
+header h1 {
+    font-size: clamp(2.4rem, 6vw, 3.5rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, 
+        var(--jungle-teal), 
+        var(--bright-fern), 
+        var(--yellow-green), 
+        var(--lemon-lime));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.8rem;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin: 0.3rem 0;
+}
+
+header p:first-of-type {
+    color: var(--lime-moss);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 1rem 1.5rem 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 26, 18, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--yellow-2);
+    background: linear-gradient(135deg, rgba(85, 166, 48, 0.2), rgba(170, 204, 0, 0.15));
+    border-color: rgba(170, 204, 0, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(170, 204, 0, 0.15);
+}
+
+/* ===== Main Content ===== */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+}
+
+/* ===== Portfolio Row (About section) ===== */
+.portfolio-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        var(--jungle-teal), 
+        var(--bright-fern), 
+        var(--yellow-green), 
+        var(--lemon-lime));
+}
+
+
+.portfolio-photo img,
+section#about img {
+    width: 280px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background: 
+        linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+        linear-gradient(135deg, var(--jungle-teal), var(--bright-fern), var(--yellow-green)) border-box;
+    box-shadow: 0 12px 30px rgba(0, 127, 95, 0.25);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.portfolio-photo img:hover,
+section#about img:hover {
+    transform: scale(1.03) rotate(5deg);
+    box-shadow: 0 16px 40px rgba(85, 166, 48, 0.35);
+}
+
+section#about.portfolio-photo,
+.portfolio-row section:last-child {
+    flex: 1;
+    min-width: 280px;
+}
+
+section#about h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.4rem;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+section#about h2::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 55%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--bright-fern), var(--yellow-green), transparent);
+    border-radius: 2px;
+}
+
+section#about p {
+    margin: 0.7rem 0;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+}
+
+section#about p strong {
+    color: var(--lime-moss);
+    font-weight: 600;
+    margin-right: 0.4rem;
+}
+
+/* ===== Ready styles for Skills / Projects / Goals ===== */
+section {
+    margin-bottom: 3rem;
+}
+
+section h2 {
+    font-size: 1.7rem;
+    margin-bottom: 1.2rem;
+    color: white;
+    position: relative;
+    display: inline-block;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 45%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sea-green), var(--lemon-lime), transparent);
+    border-radius: 2px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: rgba(170, 204, 0, 0.45);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 127, 95, 0.2);
+    background: rgba(85, 166, 48, 0.08);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .portfolio-row {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .portfolio-photo img,
+    section#about img {
+        width: 240px;
+        height: 290px;
+    }
+
+    section#about h2::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    nav {
+        gap: 0.4rem;
+    }
+
+    nav a {
+        padding: 0.45rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 3rem 1rem 2rem;
+    }
+
+    .portfolio-row {
+        padding: 1.5rem 1rem;
+    }
+}
+
+
+
+
+
