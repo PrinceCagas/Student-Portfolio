@@ -225,7 +225,7 @@ section h2::after {
     content: '';
     position: absolute;
     bottom: -8px;
-    left: 50%;               /* center the line */
+    left: 60%;               /* center the line */
     transform: translateX(-50%);
     width: 70px;             /* nice fixed width (looks better centered) */
     height: 3px;
