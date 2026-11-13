@@ -1,11 +1,29 @@
 /* ===== Google Fonts ===== */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
 
+/* ===== Custom Properties ===== */
+:root {
+    --bg-dark: #0f2a24;
+    --bg-mid: #132f28;
+    --accent: #4a7c8c;
+    --accent-soft: #a8c5b5;
+    --text-dark: #1e2a26;
+    --text-light: #f3f7f5;
+    --card-bg: rgba(255, 255, 255, 0.78);
+    --shadow: 0 12px 28px rgba(19, 47, 40, 0.14);
+    --radius: 18px;
+    --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 /* ===== Reset & Base ===== */
-* {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -13,135 +31,195 @@ body {
     background: linear-gradient(
         180deg,
         #c5dce8 0%,
-        #a3c4c9 30%,
-        #b7d0c5 60%,
+        #a3c4c9 28%,
+        #b7d0c5 58%,
         #e5f0eb 100%
     );
     background-attachment: fixed;
-    color: #1e2a26;
+    color: var(--text-dark);
     line-height: 1.65;
     min-height: 100vh;
+    position: relative;
+}
+
+/* Subtle grain texture */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* ===== Header with Snowy Mountains ===== */
 header {
     background: linear-gradient(165deg, #0a1f1a 0%, #132f28 40%, #1c453a 100%);
-    color: #f3f7f5;
+    color: var(--text-light);
     text-align: center;
-    padding: 4.2rem 1rem 7rem;
+    padding: 4.5rem 1.2rem 7.5rem;
     position: relative;
     overflow: hidden;
 }
 
-/* Far mountains */
+/* Soft animated light wash */
 header::before {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to top, #7fa89c 60%, #d8e8e4 100%);
-    clip-path: polygon(
-        0% 100%, 0% 68%, 5% 52%, 11% 62%, 17% 42%, 24% 58%,
-        31% 38%, 39% 55%, 47% 32%, 54% 50%, 61% 36%, 69% 53%,
-        76% 40%, 83% 57%, 90% 45%, 100% 55%, 100% 100%
-    );
-    opacity: 0.85;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 197, 181, 0.18), transparent 70%);
+    animation: softPulse 8s ease-in-out infinite alternate;
+    z-index: 1;
 }
 
-/* Closer mountains with snow caps */
+@keyframes softPulse {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* Far mountains */
 header::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 120px;
-    background: linear-gradient(to top, #e8f0ec 55%, #ffffff 100%);
+    height: 155px;
+    background: linear-gradient(to top, #7fa89c 55%, #d8e8e4 100%);
+    clip-path: polygon(
+        0% 100%, 0% 68%, 5% 52%, 11% 62%, 17% 42%, 24% 58%,
+        31% 38%, 39% 55%, 47% 32%, 54% 50%, 61% 36%, 69% 53%,
+        76% 40%, 83% 57%, 90% 45%, 100% 55%, 100% 100%
+    );
+    opacity: 0.9;
+    z-index: 2;
+}
+
+/* Closer snowy mountains (using an extra layer via a child or extra pseudo if needed) */
+.mountain-front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 125px;
+    background: linear-gradient(to top, #e8f0ec 50%, #ffffff 100%);
     clip-path: polygon(
         0% 100%, 0% 52%, 6% 38%, 13% 48%, 20% 28%, 27% 45%,
         34% 22%, 42% 42%, 50% 25%, 57% 47%, 65% 30%, 72% 48%,
         79% 33%, 86% 50%, 93% 38%, 100% 48%, 100% 100%
     );
+    z-index: 3;
+    filter: drop-shadow(0 -4px 12px rgba(255, 255, 255, 0.25));
 }
 
 header h1 {
     font-family: 'Outfit', sans-serif;
-    font-size: 2.9rem;
+    font-size: clamp(2.2rem, 5vw, 3.1rem);
     font-weight: 700;
-    margin-bottom: 0.4rem;
-    letter-spacing: 1px;
-    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
     position: relative;
-    z-index: 2;
+    z-index: 5;
 }
 
 header p {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.1rem;
-    opacity: 0.92;
+    font-size: 1.12rem;
+    opacity: 0.93;
     position: relative;
-    z-index: 2;
+    z-index: 5;
+    max-width: 520px;
+    margin: 0 auto;
 }
 
 /* ===== Navigation ===== */
 nav {
-    background-color: #132f28;
+    background-color: var(--bg-mid);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    padding: 0.85rem 1rem;
+    gap: 0.35rem;
+    padding: 0.9rem 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(8px);
 }
 
 nav a {
     font-family: 'Outfit', sans-serif;
     color: #e4efeb;
     text-decoration: none;
-    padding: 0.5rem 1.15rem;
-    border-radius: 40px;
+    padding: 0.55rem 1.25rem;
+    border-radius: 50px;
     font-weight: 500;
     font-size: 0.95rem;
-    transition: all 0.25s ease;
+    position: relative;
+    transition: color var(--transition), background var(--transition);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent-soft);
+    border-radius: 2px;
+    transition: width 0.3s ease, left 0.3s ease;
 }
 
 nav a:hover {
-    background-color: #a8c5b5;
-    color: #132f28;
+    background-color: rgba(168, 197, 181, 0.18);
+    color: #ffffff;
+}
+
+nav a:hover::after {
+    width: 55%;
+    left: 22.5%;
+}
+
+nav a:focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 3px;
 }
 
 /* ===== Main Content ===== */
 main {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2.8rem 1.5rem;
+    padding: 3rem 1.5rem 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 /* About Section */
 .portfolio-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5rem;
+    gap: 2.8rem;
     align-items: center;
-    margin-bottom: 3.2rem;
+    margin-bottom: 3.8rem;
 }
 
-/* Photo hover effect */
 .portfolio-photo {
-    border-radius: 18px;
-    box-shadow: 0 14px 32px rgba(19, 47, 40, 0.32);
+    width: 280px;
+    height: 340px;
+    border-radius: var(--radius);
+    box-shadow: 0 16px 36px rgba(19, 47, 40, 0.28);
     object-fit: cover;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.55s ease;
     cursor: pointer;
+    border: 3px solid rgba(255, 255, 255, 0.55);
 }
 
 .portfolio-photo:hover {
-    transform: rotate(6deg) scale(1.05);
+    transform: rotate(5deg) scale(1.06);
+    box-shadow: 0 22px 44px rgba(19, 47, 40, 0.35);
 }
 
 .about-text {
@@ -151,23 +229,24 @@ main {
 
 .about-text h2 {
     font-family: 'Outfit', sans-serif;
-    color: #132f28;
-    margin-bottom: 1rem;
-    font-size: 1.9rem;
+    color: var(--bg-mid);
+    margin-bottom: 1.1rem;
+    font-size: 1.95rem;
     font-weight: 600;
 }
 
 .about-text p {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.85rem;
+    color: #2c3a35;
 }
 
 /* Section Titles */
 section h2 {
     font-family: 'Outfit', sans-serif;
-    color: #132f28;
-    font-size: 1.9rem;
+    color: var(--bg-mid);
+    font-size: 1.95rem;
     font-weight: 600;
-    margin-bottom: 1.6rem;
+    margin-bottom: 1.8rem;
     position: relative;
     display: inline-block;
 }
@@ -175,41 +254,48 @@ section h2 {
 section h2::after {
     content: '';
     position: absolute;
-    bottom: -7px;
+    bottom: -8px;
     left: 0;
-    width: 55px;
+    width: 58px;
     height: 3.5px;
-    background: linear-gradient(90deg, #4a7c8c, #a8c5b5);
-    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+    border-radius: 4px;
+    transition: width 0.35s ease;
+}
+
+section:hover h2::after {
+    width: 85px;
 }
 
 /* Cards */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.75rem;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border-radius: 16px;
-    padding: 1.7rem;
-    box-shadow: 0 8px 22px rgba(19, 47, 40, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    transition: transform 0.28s ease, box-shadow 0.28s ease;
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: var(--radius);
+    padding: 1.85rem;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
 .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 28px rgba(19, 47, 40, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 18px 36px rgba(19, 47, 40, 0.18);
+    border-color: rgba(168, 197, 181, 0.6);
 }
 
 .card h3 {
     font-family: 'Outfit', sans-serif;
-    color: #132f28;
-    margin-bottom: 0.85rem;
-    font-size: 1.28rem;
+    color: var(--bg-mid);
+    margin-bottom: 0.95rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
@@ -219,22 +305,28 @@ section h2::after {
 }
 
 .card ul li {
-    padding: 0.42rem 0;
-    padding-left: 1.4rem;
+    padding: 0.45rem 0;
+    padding-left: 1.45rem;
     position: relative;
+    color: #2c3a35;
 }
 
 .card ul li::before {
     content: "▸";
     position: absolute;
     left: 0;
-    color: #4a7c8c;
-    font-weight: bold;
+    color: var(--accent);
+    font-weight: 700;
+    transition: transform 0.25s ease;
+}
+
+.card:hover ul li::before {
+    transform: translateX(3px);
 }
 
 /* Contact */
 .contact-card p {
-    margin: 0.75rem 0;
+    margin: 0.8rem 0;
     font-size: 1.05rem;
 }
 
@@ -242,42 +334,48 @@ section h2::after {
     color: #3d6b78;
     text-decoration: none;
     font-weight: 500;
+    transition: color 0.25s ease;
 }
 
 .contact-card a:hover {
+    color: var(--accent);
     text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 /* ===== Footer ===== */
 footer {
-    background-color: #132f28;
+    background-color: var(--bg-mid);
     color: #e4efeb;
     text-align: center;
-    padding: 2.4rem 1rem;
-    margin-top: 3.5rem;
+    padding: 2.6rem 1.2rem;
+    margin-top: 4rem;
+    position: relative;
 }
 
 .footer-content p {
-    margin: 0.35rem 0;
+    margin: 0.4rem 0;
     font-size: 0.95rem;
     opacity: 0.9;
 }
 
 .footer-links {
-    margin-top: 1.3rem;
+    margin-top: 1.4rem;
 }
 
 .footer-links a {
     font-family: 'Outfit', sans-serif;
-    color: #a8c5b5;
+    color: var(--accent-soft);
     text-decoration: none;
-    margin: 0 0.9rem;
+    margin: 0 0.95rem;
     font-size: 0.92rem;
-    transition: color 0.2s;
+    transition: color 0.25s ease, transform 0.25s ease;
+    display: inline-block;
 }
 
 .footer-links a:hover {
     color: #ffffff;
+    transform: translateY(-2px);
 }
 
 /* ===== Responsive ===== */
@@ -285,31 +383,38 @@ footer {
     .portfolio-row {
         flex-direction: column;
         text-align: center;
+        gap: 2rem;
     }
 
     .portfolio-photo {
         width: 240px;
-        height: auto;
+        height: 290px;
     }
 
     header {
-        padding: 3.2rem 1rem 5.5rem;
-    }
-
-    header h1 {
-        font-size: 2.15rem;
-    }
-
-    header::before {
-        height: 110px;
+        padding: 3.4rem 1rem 5.8rem;
     }
 
     header::after {
-        height: 90px;
+        height: 115px;
+    }
+
+    .mountain-front {
+        height: 95px;
     }
 
     nav a {
-        padding: 0.42rem 0.95rem;
+        padding: 0.45rem 1rem;
         font-size: 0.9rem;
+    }
+
+    section h2 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: 1fr;
     }
 }
