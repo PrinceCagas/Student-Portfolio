@@ -29,7 +29,7 @@
     <main>
         <div class="portfolio-row">
             <section id="about">
-                <img class="portfolio-photo" src="photo_6280367417103946634_y.jpg" alt="Prince Cagas"
+                <img class="portfolio-photo" src="C:\Student Portfolio\Assests\photo_6280367417103946634_y.jpg" alt="Prince Cagas"
                     width="300" height="360">
             </section>
 
@@ -61,17 +61,26 @@
         </section>
 
         <section id="projects">
-            <h2>My Recent Projects</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>Personal Portfolio Website</h3>
-                    <p>My first web portfolio built with HTML &amp; CSS. It showcases my skills and journey as a 1st-year BSIT student.</p>
-                </div>
-                <div class="card">
-                    <h3>Car Website for My Dad</h3>
-                    <p>A website I started building for my dad after he asked me to create one. I was still learning and couldn't finish it properly at the time.</p>
-                </div>
+    <h2>My Recent Projects</h2>
+    <div class="card-grid">
+        <div class="card project-card">
+            <img src="C:\Student Portfolio\Assests\Student.JPG" class="project-img">
+            <div class="project-info">
+                <h3>Personal Portfolio Website</h3>
+                <p>My first web portfolio built with HTML &amp; CSS. It showcases my skills and journey as a 1st-year BSIT student.</p>
             </div>
+        </div>
+
+            <div class="card project-card">
+            <img src="C:\Student Portfolio\Assests\Capture.JPG" class="project-img">
+            <div class="project-info">
+                <h3>Car Website for My Dad</h3>
+                <p>A website I started building for my dad after he asked me to create one. I was still learning and couldn't finish it properly at the time.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
         </section>
 
         <section id="goals">
@@ -89,7 +98,7 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        
         <section id="contact">
             <h2>Contact Info</h2>
             <div class="card-grid">
@@ -103,7 +112,7 @@
         </section>
     </main>
 
-    <!-- Nice Footer -->
+    
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 Prince Cagas. All rights reserved.</p>
@@ -117,6 +126,45 @@
             </div>
         </div>
     </footer>
+    
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Photo">
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        // Select all images inside <main> (profile photo + project photos)
+        document.querySelectorAll('main img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+            });
+        });
+
+        // Close when clicking the X button or anywhere outside the image
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Close when pressing the Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
 </body>
 
 </html>
