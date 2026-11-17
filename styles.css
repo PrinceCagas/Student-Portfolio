@@ -1,7 +1,7 @@
-/* ===== Google Fonts ===== */
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
 
-/* ===== Custom Properties ===== */
+
 :root {
     --bg-dark: #0f2a24;
     --bg-mid: #132f28;
@@ -15,7 +15,7 @@
     --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* ===== Reset & Base ===== */
+
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -42,7 +42,7 @@ body {
     position: relative;
 }
 
-/* Subtle grain texture */
+
 body::before {
     content: "";
     position: fixed;
@@ -53,7 +53,7 @@ body::before {
     z-index: 0;
 }
 
-/* ===== Header with Snowy Mountains ===== */
+
 header {
     background: linear-gradient(165deg, #0a1f1a 0%, #132f28 40%, #1c453a 100%);
     color: var(--text-light);
@@ -63,7 +63,7 @@ header {
     overflow: hidden;
 }
 
-/* Soft animated light wash */
+
 header::before {
     content: "";
     position: absolute;
@@ -78,7 +78,7 @@ header::before {
     100% { opacity: 1; }
 }
 
-/* Far mountains */
+
 header::after {
     content: "";
     position: absolute;
@@ -133,7 +133,7 @@ header p {
     margin: 0 auto;
 }
 
-/* ===== Navigation ===== */
+
 nav {
     background-color: var(--bg-mid);
     display: flex;
@@ -343,7 +343,7 @@ section:hover h2::after {
     text-underline-offset: 3px;
 }
 
-/* ===== Footer ===== */
+
 footer {
     background-color: var(--bg-mid);
     color: #e4efeb;
