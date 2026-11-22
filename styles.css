@@ -1,20 +1,22 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
 
 :root {
-    --bg-dark: #0f2a24;
-    --bg-mid: #132f28;
-    --accent: #4a7c8c;
-    --accent-soft: #a8c5b5;
-    --text-dark: #1e2a26;
-    --text-light: #f3f7f5;
-    --card-bg: rgba(255, 255, 255, 0.78);
-    --shadow: 0 12px 28px rgba(19, 47, 40, 0.14);
-    --radius: 18px;
+    /* Design Book Palette */
+    --primary: #1B4332;          /* Deep Forest Green – nav / header */
+    --secondary: #40916C;        /* Sage Green – sections / cards accents */
+    --accent: #BC6C25;           /* Autumn Warmth – CTAs / emphasis */
+    --background: #F8F5F0;       /* Warm Cream – page background */
+    --text: #1A2A1A;             /* Deep Charcoal Green – body & headings */
+
+    /* Supporting tokens */
+    --text-light: #F8F5F0;
+    --card-bg: #FFFFFF;
+    --border-subtle: rgba(27, 67, 50, 0.12);
+    --shadow: 0 4px 12px rgba(27, 67, 50, 0.08);
+    --shadow-hover: 0 8px 24px rgba(27, 67, 50, 0.12);
+    --radius: 8px;               /* Design Book: 8px on cards & buttons */
     --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-
 
 *, *::before, *::after {
     margin: 0;
@@ -27,35 +29,30 @@ html {
 }
 
 body {
-    font-family: 'DM Sans', system-ui, sans-serif;
-    background: linear-gradient(
-        180deg,
-        #c5dce8 0%,
-        #a3c4c9 28%,
-        #b7d0c5 58%,
-        #e5f0eb 100%
-    );
-    background-attachment: fixed;
-    color: var(--text-dark);
-    line-height: 1.65;
+    font-family: 'Roboto', system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+    background-color: var(--background);
+    color: var(--text);
     min-height: 100vh;
     position: relative;
 }
 
-
+/* Subtle paper / nature texture (very light) */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.035;
+    opacity: 0.025;
     pointer-events: none;
     z-index: 0;
 }
 
-
+/* ===== Header ===== */
 header {
-    background: linear-gradient(165deg, #0a1f1a 0%, #132f28 40%, #1c453a 100%);
+    background: linear-gradient(165deg, #142e24 0%, var(--primary) 45%, #1f4d3a 100%);
     color: var(--text-light);
     text-align: center;
     padding: 4.5rem 1.2rem 7.5rem;
@@ -63,22 +60,21 @@ header {
     overflow: hidden;
 }
 
-
 header::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 197, 181, 0.18), transparent 70%);
+    background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(64, 145, 108, 0.22), transparent 70%);
     animation: softPulse 8s ease-in-out infinite alternate;
     z-index: 1;
 }
 
 @keyframes softPulse {
-    0% { opacity: 0.6; }
+    0% { opacity: 0.55; }
     100% { opacity: 1; }
 }
 
-
+/* Mountain layers – nature theme kept */
 header::after {
     content: "";
     position: absolute;
@@ -86,7 +82,7 @@ header::after {
     left: 0;
     width: 100%;
     height: 155px;
-    background: linear-gradient(to top, #7fa89c 55%, #d8e8e4 100%);
+    background: linear-gradient(to top, #3d6b55 55%, #7fa89c 100%);
     clip-path: polygon(
         0% 100%, 0% 68%, 5% 52%, 11% 62%, 17% 42%, 24% 58%,
         31% 38%, 39% 55%, 47% 32%, 54% 50%, 61% 36%, 69% 53%,
@@ -96,7 +92,6 @@ header::after {
     z-index: 2;
 }
 
-/* Closer snowy mountains (using an extra layer via a child or extra pseudo if needed) */
 .mountain-front {
     position: absolute;
     bottom: 0;
@@ -110,52 +105,55 @@ header::after {
         79% 33%, 86% 50%, 93% 38%, 100% 48%, 100% 100%
     );
     z-index: 3;
-    filter: drop-shadow(0 -4px 12px rgba(255, 255, 255, 0.25));
+    filter: drop-shadow(0 -4px 12px rgba(255, 255, 255, 0.2));
 }
 
 header h1 {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(2.2rem, 5vw, 3.1rem);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: clamp(2.4rem, 5.5vw, 3.4rem); /* ~36–42px range */
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
     letter-spacing: 0.5px;
-    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
     position: relative;
     z-index: 5;
 }
 
 header p {
-    font-size: 1.12rem;
-    opacity: 0.93;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.92;
     position: relative;
     z-index: 5;
     max-width: 520px;
     margin: 0 auto;
+    line-height: 1.5;
 }
 
-
+/* ===== Navigation ===== */
 nav {
-    background-color: var(--bg-mid);
+    background-color: var(--primary);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.35rem;
-    padding: 0.9rem 1rem;
+    padding: 0.85rem 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
-    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(27, 67, 50, 0.25);
 }
 
 nav a {
-    font-family: 'Outfit', sans-serif;
-    color: #e4efeb;
-    text-decoration: none;
-    padding: 0.55rem 1.25rem;
-    border-radius: 50px;
-    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
     font-size: 0.95rem;
+    font-weight: 500;
+    color: #e8f0ec;
+    text-decoration: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
     position: relative;
     transition: color var(--transition), background var(--transition);
 }
@@ -167,13 +165,13 @@ nav a::after {
     left: 50%;
     width: 0;
     height: 2px;
-    background: var(--accent-soft);
+    background: var(--accent);
     border-radius: 2px;
     transition: width 0.3s ease, left 0.3s ease;
 }
 
 nav a:hover {
-    background-color: rgba(168, 197, 181, 0.18);
+    background-color: rgba(64, 145, 108, 0.25);
     color: #ffffff;
 }
 
@@ -183,7 +181,7 @@ nav a:hover::after {
 }
 
 nav a:focus-visible {
-    outline: 2px solid var(--accent-soft);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
 
@@ -208,18 +206,18 @@ main {
 .portfolio-photo {
     width: 280px;
     height: 340px;
-    border-radius: var(--radius);
-    box-shadow: 0 16px 36px rgba(19, 47, 40, 0.28);
+    border-radius: 10px; /* 8–12px range from design book */
     object-fit: cover;
-    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                box-shadow 0.55s ease;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-subtle);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.5s ease;
     cursor: pointer;
-    border: 3px solid rgba(255, 255, 255, 0.55);
 }
 
 .portfolio-photo:hover {
-    transform: rotate(5deg) scale(1.06);
-    box-shadow: 0 22px 44px rgba(19, 47, 40, 0.35);
+    transform: rotate(3deg) scale(1.04);
+    box-shadow: var(--shadow-hover);
 }
 
 .about-text {
@@ -228,25 +226,27 @@ main {
 }
 
 .about-text h2 {
-    font-family: 'Outfit', sans-serif;
-    color: var(--bg-mid);
-    margin-bottom: 1.1rem;
-    font-size: 1.95rem;
-    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem; /* ~24px */
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--primary);
+    margin-bottom: 1rem;
 }
 
 .about-text p {
     margin-bottom: 0.85rem;
-    color: #2c3a35;
+    color: var(--text);
 }
 
 /* Section Titles */
 section h2 {
-    font-family: 'Outfit', sans-serif;
-    color: var(--bg-mid);
-    font-size: 1.95rem;
-    font-weight: 600;
-    margin-bottom: 1.8rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem; /* 22–24px */
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--primary);
+    margin-bottom: 1.6rem;
     position: relative;
     display: inline-block;
 }
@@ -254,49 +254,47 @@ section h2 {
 section h2::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: -7px;
     left: 0;
-    width: 58px;
-    height: 3.5px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-soft));
-    border-radius: 4px;
+    width: 52px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 3px;
     transition: width 0.35s ease;
 }
 
 section:hover h2::after {
-    width: 85px;
+    width: 78px;
 }
 
 /* Cards */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 1.75rem;
+    gap: 1.6rem;
 }
 
 .card {
     background: var(--card-bg);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     border-radius: var(--radius);
-    padding: 1.85rem;
+    padding: 1.7rem;
     box-shadow: var(--shadow);
-    border: 1px solid rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--border-subtle);
     transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 36px rgba(19, 47, 40, 0.18);
-    border-color: rgba(168, 197, 181, 0.6);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(64, 145, 108, 0.35);
 }
 
 .card h3 {
-    font-family: 'Outfit', sans-serif;
-    color: var(--bg-mid);
-    margin-bottom: 0.95rem;
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.9rem;
 }
 
 .card ul {
@@ -305,33 +303,34 @@ section:hover h2::after {
 }
 
 .card ul li {
-    padding: 0.45rem 0;
-    padding-left: 1.45rem;
+    padding: 0.4rem 0;
+    padding-left: 1.35rem;
     position: relative;
-    color: #2c3a35;
+    color: var(--text);
 }
 
 .card ul li::before {
     content: "▸";
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--secondary);
     font-weight: 700;
     transition: transform 0.25s ease;
 }
 
 .card:hover ul li::before {
     transform: translateX(3px);
+    color: var(--accent);
 }
 
 /* Contact */
 .contact-card p {
-    margin: 0.8rem 0;
+    margin: 0.75rem 0;
     font-size: 1.05rem;
 }
 
 .contact-card a {
-    color: #3d6b78;
+    color: var(--secondary);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.25s ease;
@@ -343,32 +342,32 @@ section:hover h2::after {
     text-underline-offset: 3px;
 }
 
-
+/* ===== Footer ===== */
 footer {
-    background-color: var(--bg-mid);
-    color: #e4efeb;
+    background-color: var(--primary);
+    color: #e8f0ec;
     text-align: center;
-    padding: 2.6rem 1.2rem;
+    padding: 2.5rem 1.2rem;
     margin-top: 4rem;
-    position: relative;
 }
 
 .footer-content p {
-    margin: 0.4rem 0;
+    margin: 0.35rem 0;
     font-size: 0.95rem;
     opacity: 0.9;
 }
 
 .footer-links {
-    margin-top: 1.4rem;
+    margin-top: 1.3rem;
 }
 
 .footer-links a {
-    font-family: 'Outfit', sans-serif;
-    color: var(--accent-soft);
+    font-family: 'Roboto', sans-serif;
+    color: #a8c5b5;
     text-decoration: none;
-    margin: 0 0.95rem;
+    margin: 0 0.9rem;
     font-size: 0.92rem;
+    font-weight: 500;
     transition: color 0.25s ease, transform 0.25s ease;
     display: inline-block;
 }
@@ -378,62 +377,7 @@ footer {
     transform: translateY(-2px);
 }
 
-
-@media (max-width: 700px) {
-    .portfolio-row {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
-        #projects .card-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .project-card {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .project-img {
-        width: 100%;
-        height: 180px;
-    }
-    }
-
-    .portfolio-photo {
-        width: 240px;
-        height: 290px;
-    }
-
-    header {
-        padding: 3.4rem 1rem 5.8rem;
-    }
-
-    header::after {
-        height: 115px;
-    }
-
-    .mountain-front {
-        height: 95px;
-    }
-
-    nav a {
-        padding: 0.45rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    section h2 {
-        font-size: 1.7rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-
+/* ===== Projects ===== */
 #projects .card-grid {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
 }
@@ -442,17 +386,17 @@ footer {
     display: flex;
     align-items: center;
     gap: 1.4rem;
-    min-width: 0; 
+    min-width: 0;
 }
 
 .project-img {
     width: 140px;
     height: 140px;
-    border-radius: 12px;
+    border-radius: 10px;
     object-fit: cover;
     flex-shrink: 0;
-    border: 2px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0 6px 16px rgba(19, 47, 40, 0.14);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow);
     transition: transform var(--transition);
     cursor: pointer;
 }
@@ -467,17 +411,17 @@ footer {
     word-wrap: break-word;
 }
 
-
+/* ===== Lightbox ===== */
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(10, 31, 26, 0.9);
+    background: rgba(27, 67, 50, 0.92);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 3.5rem 1.25rem 1.5rem; /* Top padding leaves clear space for the X button */
+    padding: 3.5rem 1.25rem 1.5rem;
     z-index: 9999;
     opacity: 0;
     pointer-events: none;
@@ -496,8 +440,8 @@ footer {
     height: auto;
     object-fit: contain;
     border-radius: var(--radius);
-    border: 3px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
     transform: scale(0.9);
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -512,8 +456,8 @@ footer {
     right: 1rem;
     width: 44px;
     height: 44px;
-    background: rgba(255, 255, 255, 0.18);
-    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
     border-radius: 50%;
     color: #ffffff;
     font-size: 1.8rem;
@@ -529,10 +473,10 @@ footer {
 
 .lightbox-close:hover {
     background: var(--accent);
-    transform: scale(1.1);
+    transform: scale(1.08);
 }
 
-
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
     .portfolio-row {
         flex-direction: column;
@@ -563,10 +507,9 @@ footer {
     }
 
     section h2 {
-        font-size: 1.7rem;
+        font-size: 1.4rem;
     }
 
-    /* Fix Recent Projects overlapping on mobile */
     .card-grid,
     #projects .card-grid {
         grid-template-columns: 1fr;
@@ -582,5 +525,15 @@ footer {
     .project-img {
         width: 100%;
         height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 2.3rem;
     }
 }
